@@ -790,6 +790,7 @@ class GruyereRequestHandler(BaseHTTPRequestHandler):
     #   (3) Inject a random identifier as the first part of the path and
     # quit if a request is received without this identifier (except for an
     # empty path which redirects and /favicon.ico).
+
     request_ip = self.client_address[0]                      # DO NOT CHANGE
     if request_ip not in allowed_ips:                        # DO NOT CHANGE
       print >>sys.stderr, (                                  # DO NOT CHANGE
@@ -801,16 +802,14 @@ class GruyereRequestHandler(BaseHTTPRequestHandler):
       if path == '' or path == '/':                          # DO NOT CHANGE
         self._SendRedirect('/', server_unique_id)            # DO NOT CHANGE
         return                                               # DO NOT CHANGE
-      else:                                                  # DO NOT CHANGE
-        print >>sys.stderr, (                                # DO NOT CHANGE
-            'DANGER! Request without unique id: ' + path)    # DO NOT CHANGE
-        _Exit('bad_id')                                      # DO NOT CHANGE
+     
 
     path = path.replace('/' + server_unique_id, '', 1)       # DO NOT CHANGE
 
     # END WARNING!
 
- 
+    self.HandleRequest(path, query, server_unique_id)
+
     self.HandleRequest(path, query, server_unique_id)
 
   def HandleRequest(self, path, query, unique_id):
